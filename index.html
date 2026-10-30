@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umpan Balik Kombel KEREN - SMAN 1 Tangen</title>
+    <style>
+        /* Modern Native Font Stack & Dark Theme Reset */
+        * {
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            user-select: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        body, html {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #070a12;
+            color: #f1f5f9;
+        }
+
+        /* 16:9 Aspect Ratio Frame Layout */
+        .stage-container {
+            width: 100vw;
+            height: 56.25vw;
+            max-height: 100vh;
+            max-width: 177.78vh;
+            margin: auto;
+            position: absolute;
+            top: 0; bottom: 0; left: 0; right: 0;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #0b132b 0%, #1c2541 100%);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            border: 1px solid #1e293b;
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+
+        /* Scrollbar Styling */
+        .custom-scroll {
+            overflow-y: auto !important;
+            scroll-behavior: smooth;
+        }
+        .custom-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.8);
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb:hover {
+            background: #06b6d4;
+        }
+
+        /* Utilities */
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .flex-1 { flex: 1 1 0%; }
+        .items-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .justify-between { justify-content: space-between; }
+        .space-x-2 > * + * { margin-left: 0.5rem; }
+        .space-x-3 > * + * { margin-left: 0.75rem; }
+        .space-y-2 > * + * { margin-top: 0.5rem; }
+        .space-y-3 > * + * { margin-top: 0.75rem; }
+        .space-y-4 > * + * { margin-top: 1rem; }
+        .grid { display: grid; }
+        .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+        .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .gap-3 { gap: 0.75rem; }
+        .gap-4 { gap: 1rem; }
+        
+        .hidden { display: none !important; }
+        .relative { position: relative; }
+        .absolute { position: absolute; }
+        
+        .p-2 { padding: 0.5rem; }
+        .p-3 { padding: 0.75rem; }
+        .p-4 { padding: 1rem; }
+        .p-5 { padding: 1.25rem; }
+        .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+        .px-4 { padding-left: 1rem; padding-right: 1rem; }
+        .py-1-5 { padding-top: 0.375rem; padding-bottom: 0.375rem; }
+        .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+
+        .w-full { width: 100%; }
+        .h-full { height: 100%; }
+        .max-w-4xl { max-width: 56rem; }
+        .max-w-5xl { max-width: 64rem; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+
+        .rounded-lg { border-radius: 0.5rem; }
+        .rounded-xl { border-radius: 0.75rem; }
+        .rounded-2xl { border-radius: 1rem; }
+        .rounded-full { border-radius: 9999px; }
+
+        .bg-slate-950 { background-color: #020617; }
+        .bg-slate-900 { background-color: #0f172a; }
+        .bg-slate-800 { background-color: #1e293b; }
+        .bg-cyan-950 { background-color: #083344; }
+
+        .border { border-width: 1px; border-style: solid; }
+        .border-slate-800 { border-color: #1e293b; }
+        .border-slate-700 { border-color: #334155; }
+        .border-cyan-500-40 { border-color: rgba(6, 182, 212, 0.4); }
+
+        .text-xs { font-size: 0.75rem; line-height: 1rem; }
+        .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+        .text-base { font-size: 1rem; line-height: 1.5rem; }
+        .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+
+        .font-semibold { font-weight: 600; }
+        .font-bold { font-weight: 700; }
+        .font-extrabold { font-weight: 800; }
+
+        .text-white { color: #ffffff; }
+        .text-slate-200 { color: #e2e8f0; }
+        .text-slate-300 { color: #cbd5e1; }
+        .text-slate-400 { color: #94a3b8; }
+        .text-cyan-300 { color: #67e8f9; }
+        .text-cyan-400 { color: #22d3ee; }
+        .text-emerald-400 { color: #34d399; }
+        .text-amber-300 { color: #fde047; }
+        .text-amber-400 { color: #fbbf24; }
+
+        .cursor-pointer { cursor: pointer; }
+        .transition-all { transition: all 0.3s ease; }
+
+        .svg-icon {
+            width: 1.1em;
+            height: 1.1em;
+            display: inline-block;
+            vertical-align: -0.15em;
+            fill: currentColor;
+        }
+
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Form Inputs */
+        input[type="text"], select, textarea {
+            width: 100%;
+            background-color: #020617;
+            border: 1px solid #334155;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            color: #f1f5f9;
+            font-size: 0.75rem;
+            outline: none;
+            user-select: text;
+        }
+
+        input[type="text"]:focus, select:focus, textarea:focus {
+            border-color: #06b6d4;
+            box-shadow: 0 0 8px rgba(6, 182, 212, 0.3);
+        }
+
+        .option-card {
+            background-color: #020617;
+            border: 1px solid #1e293b;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            space-x: 0.5rem;
+        }
+
+        .option-card:hover {
+            border-color: #06b6d4;
+            background-color: #083344;
+        }
+
+        .option-card input {
+            accent-color: #06b6d4;
+        }
+
+        /* Checkbox Styling */
+        input[type="checkbox"], input[type="radio"] {
+            cursor: pointer;
+            width: 1rem;
+            height: 1rem;
+            accent-color: #06b6d4;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="stage-container">
+        <!-- Top Header Navigation -->
+        <header class="h-14 bg-slate-900 border-b border-slate-800 px-4 flex items-center justify-between z-20 shrink-0">
+            <div class="flex items-center space-x-3">
+                <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold shadow-lg">
+                    <svg class="svg-icon" viewBox="0 0 640 512"><path d="M144 160c44.2 0 80-35.8 80-80s-35.8-80-80-80-80 35.8-80 80 35.8 80 80 80zm368 0c44.2 0 80-35.8 80-80s-35.8-80-80-80-80 35.8-80 80 35.8 80 80 80zm-368 32c-70.7 0-128 57.3-128 128v32c0 17.7 14.3 32 32 32h192c17.7 0 32-14.3 32-32v-32c0-70.7-57.3-128-128-128zm368 0c-25.1 0-48.4 7.2-68.2 19.7 15.6 22 24.2 48.7 24.2 76.3v32c0 6.1-.8 12.1-2.2 18h138.2c17.7 0 32-14.3 32-32v-16c0-70.7-57.3-128-128-128zM320 256c44.2 0 80-35.8 80-80s-35.8-80-80-80-80 35.8-80 80 35.8 80 80 80zm0 32c-70.7 0-128 57.3-128 128v32c0 17.7 14.3 32 32 32h192c17.7 0 32-14.3 32-32v-32c0-70.7-57.3-128-128-128z"/></svg>
+                </div>
+                <div>
+                    <h1 class="font-bold text-sm text-slate-100 leading-tight">UMPAN BALIK KOMBEL KEREN</h1>
+                    <p class="text-[10px] text-cyan-400 font-medium">SMA Negeri 1 Tangen - Perangkat Ajar Modular (Pertemuan 1-4)</p>
+                </div>
+            </div>
+
+            <!-- Header Badges -->
+            <div class="flex items-center space-x-2">
+                <span class="text-[10px] bg-amber-950/80 text-amber-300 border border-amber-800/80 px-2.5 py-1 rounded-full font-semibold flex items-center">
+                    <svg class="svg-icon mr-1" viewBox="0 0 512 512"><path d="M256 0a256 256 0 1 0 0 512A256 256 0 1 0 256 0zm0 96a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm32 320h-64V224h64v192z"/></svg>
+                    Pertemuan 5: Akan Datang
+                </span>
+                <button onclick="playClick(); exportJSON();" class="px-3 py-1-5 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg text-xs font-bold transition">
+                    Ekspor Data
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Form Area (Fully Scrollable) -->
+        <main class="flex-1 relative bg-slate-950 p-5 custom-scroll">
+            <div class="max-w-4xl mx-auto space-y-6 pb-12">
+
+                <!-- Upcoming Meeting Banner -->
+                <div class="p-3.5 rounded-xl bg-gradient-to-r from-amber-950/60 via-slate-900 to-cyan-950/60 border border-amber-500/40 flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-sm">5</div>
+                        <div>
+                            <h2 class="text-xs font-bold text-amber-300">Pengumuman Pertemuan Ke-5</h2>
+                            <p class="text-[11px] text-slate-300">Pertemuan 5 (Integrasi Perangkat Modular ke Modul Ajar & Praktik Baik) akan diselenggarakan di waktu yang akan datang.</p>
+                        </div>
+                    </div>
+                    <span class="text-[10px] bg-slate-900 text-slate-400 px-2 py-1 rounded border border-slate-700">Coming Soon</span>
+                </div>
+
+                <!-- IDENTITAS RESPONDEN -->
+                <div class="p-4 rounded-xl glass-panel space-y-4">
+                    <h2 class="text-xs font-bold text-cyan-400 uppercase tracking-wider border-b border-slate-800 pb-2">I. Identitas Responden</h2>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-[11px] font-semibold text-slate-300 block mb-1">Mata Pelajaran yang Diampu:</label>
+                            <input type="text" id="mapel" placeholder="Contoh: Informatika / Fisika / Matematika">
+                        </div>
+                        <div>
+                            <label class="text-[11px] font-semibold text-slate-300 block mb-1">Fase / Kelas yang Diajar:</label>
+                            <div class="space-y-1.5 pt-1">
+                                <label class="option-card"><input type="radio" name="fase" value="Fase E (Kelas X)" checked> <span class="text-xs text-slate-200">Fase E (Kelas X)</span></label>
+                                <label class="option-card"><input type="radio" name="fase" value="Fase F (Kelas XI/XII)"> <span class="text-xs text-slate-200">Fase F (Kelas XI/XII)</span></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="text-[11px] font-semibold text-slate-300 block mb-1.5">Pertemuan yang Diikuti:</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <label class="option-card"><input type="checkbox" name="pertemuan" value="Pertemuan 1" checked> <span class="text-xs text-slate-200">Pertemuan 1 (Konsep Modular & MPI)</span></label>
+                            <label class="option-card"><input type="checkbox" name="pertemuan" value="Pertemuan 2" checked> <span class="text-xs text-slate-200">Pertemuan 2 (MPI)</span></label>
+                            <label class="option-card"><input type="checkbox" name="pertemuan" value="Pertemuan 3" checked> <span class="text-xs text-slate-200">Pertemuan 3 (Pengembangan Gim Edukatif)</span></label>
+                            <label class="option-card"><input type="checkbox" name="pertemuan" value="Pertemuan 4" checked> <span class="text-xs text-slate-200">Pertemuan 4 (Pemanfaatan & Pengembangan Lab Maya)</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUBSTANSI MATERI -->
+                <div class="space-y-5">
+                    <h2 class="text-xs font-bold text-cyan-400 uppercase tracking-wider border-b border-slate-800 pb-1">II. Umpan Balik Substansi Materi Per Pertemuan</h2>
+
+                    <!-- Pertemuan 1 -->
+                    <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-3">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                            <h3 class="text-xs font-bold text-slate-200">Pertemuan 1 dan 2: Konsep Media Pembelajaran Interaktif (MPI) Modular</h3>
+                            <span class="text-[10px] bg-cyan-950 text-cyan-300 border border-cyan-800/80 px-2 py-0.5 rounded">Selesai</span>
+                        </div>
+                        <div>
+                            <p class="text-[11px] text-slate-300 mb-1.5">1. Seberapa jelas pemahaman Anda mengenai konsep materi modular pada MPI setelah mengikuti Pertemuan 1 dan 2?</p>
+                            <div class="grid grid-cols-4 gap-2">
+                                <label class="option-card"><input type="radio" name="p1_pemahaman" value="Sangat Jelas" checked> <span class="text-xs text-slate-200">Sangat Jelas</span></label>
+                                <label class="option-card"><input type="radio" name="p1_pemahaman" value="Cukup Jelas"> <span class="text-xs text-slate-200">Cukup Jelas</span></label>
+                                <label class="option-card"><input type="radio" name="p1_pemahaman" value="Kurang Jelas"> <span class="text-xs text-slate-200">Kurang Jelas</span></label>
+                                <label class="option-card"><input type="radio" name="p1_pemahaman" value="Tidak Jelas"> <span class="text-xs text-slate-200">Tidak Jelas</span></label>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-[11px] text-slate-300 mb-1">2. Bagian mana dari penyusunan/desain MPI yang paling bermanfaat bagi Anda?</p>
+                            <input type="text" id="p1_bermanfaat" placeholder="Tuliskan bagian penyusunan MPI yang bermanfaat...">
+                        </div>
+                        <div>
+                            <p class="text-[11px] text-slate-300 mb-1">3. Kendala teknis atau konseptual apa yang Anda temui saat mencoba membuat atau menyusun MPI?</p>
+                            <input type="text" id="p1_kendala" placeholder="Tuliskan kendala teknis/konseptual jika ada...">
+                        </div>
+                    </div>
+
+                    <!-- Pertemuan 2 -->
+                    <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-3">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                            <h3 class="text-xs font-bold text-slate-200">Pertemuan 3: Pengembangan Gim Edukatif (Game-Based Learning)</h3>
+                            <span class="text-[10px] bg-cyan-950 text-cyan-300 border border-cyan-800/80 px-2 py-0.5 rounded">Selesai</span>
+                        </div>
+                        <div>
+                            <p class="text-[11px] text-slate-300 mb-1.5">1. Apakah materi penyusunan Gim Edukatif yang disampaikan sesuai dengan kebutuhan variasi pembelajaran di kelas Anda?</p>
+                            <div class="grid grid-cols-4 gap-2">
+                                <label class="option-card"><input type="radio" name="p2_kesesuaian" value="Sangat Sesuai" checked> <span class="text-xs text-slate-200">Sangat Sesuai</span></label>
+                                <label class="option-card"><input type="radio" name="p2_kesesuaian" value="Sesuai"> <span class="text-xs text-slate-200">Sesuai</span></label>
+                                <label class="option-card"><input type="radio" name="p2_kesesuaian" value="Kurang Sesuai"> <span class="text-xs text-slate-200">Kurang Sesuai</span></label>
+                                <label class="option-card"><input type="radio" name="p2_kesesuaian" value="Tidak Sesuai"> <span class="text-xs text-slate-200">Tidak Sesuai</span></label>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-[11px] text-slate-300 mb-1">2. Menurut Anda, jenis Gim Edukatif seperti apa yang paling realistis untuk diterapkan pada karakteristik siswa SMAN 1 Tangen?</p>
+                            <input type="text" id="p2_jenis_gim" placeholder="Contoh: Kuis interaktif, petualangan, tebak gambar...">
+                        </div>
+                        <div>
+                            <p class="text-[11px] text-slate-300 mb-1.5">3. Seberapa mudah fitur/platform penyusunan Gim Edukatif yang dipraktikkan dalam Kombel untuk Anda operasikan secara mandiri?</p>
+                            <div class="grid grid-cols-4 gap-2">
+                                <label class="option-card"><input type="radio" name="p2_kemudahan" value="Sangat Mudah" checked> <span class="text-xs text-slate-200">Sangat Mudah</span></label>
+                                <label class="option-card"><input type="radio" name="p2_kemudahan" value="Cukup Mudah"> <span class="text-xs text-slate-200">Cukup Mudah</span></label>
+                                <label class="option-card"><input type="radio" name="p2_kemudahan" value="Sulit"> <span class="text-xs text-slate-200">Sulit</span></label>
+                                <label class="option-card"><input type="radio" name="p2_kemudahan" value="Sangat Sulit"> <span class="text-xs text-slate-200">Sangat Sulit</span></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pertemuan 3 -->
+                    <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-3">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                            <h3 class="text-xs font-bold text-slate-200">Pertemuan 4: Integrasi & Praktik Lab Maya Interaktif</h3>
+                            <span class="text-[10px] bg-cyan-950 text-cyan-300 border border-cyan-800/80 px-2 py-0.5 rounded">Selesai</span>
+                        </div>
+                        <div>
+                            <p class="text-[11px] text-slate-300 mb-1.5">1. Apakah simulasi/praktik Lab Maya yang dipelajari memberikan gambaran jelas mengenai alternatif praktikum tanpa keterbatasan laboratorium fisik?</p>
+                            <div class="grid grid-cols-3 gap-2">
+                                <label class="option-card"><input type="radio" name="p3_gambaran" value="Ya, Sangat Jelas" checked> <span class="text-xs text-slate-200">Ya, Sangat Jelas</span></label>
+                                <label class="option-card"><input type="radio" name="p3_gambaran" value="Cukup Jelas"> <span class="text-xs text-slate-200">Cukup Jelas</span></label>
+                                <label class="option-card"><input type="radio" name="p3_gambaran" value="Belum Memberikan Gambaran"> <span class="text-xs text-slate-200">Belum Memberikan Gambaran</span></label>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-[11px] text-slate-300 mb-1">2. Fitur atau kemampuan Lab Maya apa yang paling menarik dan berpotensi meningkatkan keterlibatan (engagement) siswa Anda?</p>
+                            <input type="text" id="p3_fitur" placeholder="Tuliskan fitur Lab Maya yang menarik...">
+                        </div>
+                        <div>
+                            <p class="text-[11px] text-slate-300 mb-1">3. Apa tantangan utama yang Anda prediksi akan dihadapi siswa saat mengakses Lab Maya (misal: fasilitas gawai, pemahaman alur, dll.)?</p>
+                            <input type="text" id="p3_tantangan" placeholder="Tuliskan tantangan prediksi siswa...">
+                        </div>
+                    </div>
+
+                    <!-- Pertemuan 4 -->
+                    <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-3">
+                        <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                            <h3 class="text-xs font-bold text-slate-200">Pertemuan 5: Integrasi Modul Ajar, Portofolio, & Praktik Baik</h3>
+                            <span class="text-[10px] bg-cyan-950 text-cyan-300 border border-cyan-800/80 px-2 py-0.5 rounded">Selesai</span>
+                        </div>
+                        <div>
+                            <p class="text-[11px] text-slate-300 mb-1.5">1. Seberapa siap Anda mengintegrasikan media modular (MPI, Gim Edukatif, atau Lab Maya) ke dalam Modul Ajar / RPP Anda?</p>
+                            <div class="grid grid-cols-2 gap-2">
+                                <label class="option-card"><input type="radio" name="p4_kesiapan" value="Sangat Siap & Sudah Menyusun" checked> <span class="text-xs text-slate-200">Sangat Siap & Sudah Menyusun</span></label>
+                                <label class="option-card"><input type="radio" name="p4_kesiapan" value="Cukup Siap (Masih Proses)"> <span class="text-xs text-slate-200">Cukup Siap (Masih Proses)</span></label>
+                                <label class="option-card"><input type="radio" name="p4_kesiapan" value="Masih Ragu / Butuh Pendampingan"> <span class="text-xs text-slate-200">Masih Ragu / Butuh Pendampingan</span></label>
+                                <label class="option-card"><input type="radio" name="p4_kesiapan" value="Belum Siap Sama Sekali"> <span class="text-xs text-slate-200">Belum Siap Sama Sekali</span></label>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-[11px] text-slate-300 mb-1">2. Apakah sesi berbagi praktik baik di pertemuan ke-5 memberikan inspirasi baru dalam variasi mengajar Anda? Berikan alasannya secara singkat.</p>
+                            <textarea id="p4_praktik_baik" rows="2" placeholder="Berikan tanggapan singkat Anda mengenai sesi berbagi praktik baik..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-center pt-4">
+                    <button id="btnSubmit" onclick="submitForm()" class="w-full py-3.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-extrabold text-sm rounded-xl shadow-lg transition transform hover:scale-[1.01] cursor-pointer">
+                        Kirim Umpan Balik Kombel
+                    </button>
+                </div>
+
+                <!-- Output Display -->
+                <div id="outputSuccess" class="hidden p-4 rounded-xl bg-emerald-950/80 border border-emerald-600 text-center space-y-2">
+                    <h3 class="text-xs font-bold text-emerald-400">Terima Kasih! Umpan Balik Berhasil Disimpan.</h3>
+                    <p class="text-[11px] text-slate-300">Data Anda telah terekam untuk evaluasi Kombel KEREN SMAN 1 Tangen.</p>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Footer Bar -->
+        <footer class="h-8 bg-slate-950 border-t border-slate-800 px-4 flex items-center justify-between text-[10px] text-slate-500 shrink-0">
+            <span>Komunitas Belajar (Kombel) KEREN &copy; SMA Negeri 1 Tangen</span>
+            <span>Program Media Modular: MPI | Gim Edu | Lab Maya</span>
+        </footer>
+    </div>
+
+    <script>
+        // Tempelkan Web App URL yang Anda dapatkan dari Google Apps Script di bawah ini:
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbySUAy820rU6LsI3b1lTmeptvPWKEb-7th4ZRhnZ21Lu1nyqZ11GbyJLG_yMNq-Yn0RbQ/exec";
+
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioCtxClass();
+            }
+        }
+
+        function playClick() {
+            try {
+                initAudio();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.1);
+            } catch(e) {}
+        }
+
+        function playSuccess() {
+            try {
+                initAudio();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+                osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.3);
+            } catch(e) {}
+        }
+
+        async function submitForm() {
+            playClick();
+
+            const btnSubmit = document.getElementById('btnSubmit');
+            const outputSuccess = document.getElementById('outputSuccess');
+            
+            // Kumpulkan daftar pertemuan yang diikuti
+            const pDiikuti = [];
+            document.querySelectorAll('input[name="pertemuan"]:checked').forEach(cb => pDiikuti.push(cb.value));
+
+            // Susun payload data JSON
+            const payload = {
+                mapel: document.getElementById('mapel').value || "Belum diisi",
+                fase: document.querySelector('input[name="fase"]:checked')?.value || "Belum dipilih",
+                pertemuan_diikuti: pDiikuti,
+                p1_pemahaman: document.querySelector('input[name="p1_pemahaman"]:checked')?.value || "Belum diisi",
+                p1_bermanfaat: document.getElementById('p1_bermanfaat').value || "-",
+                p1_kendala: document.getElementById('p1_kendala').value || "-",
+                p2_kesesuaian: document.querySelector('input[name="p2_kesesuaian"]:checked')?.value || "Belum diisi",
+                p2_jenis_gim: document.getElementById('p2_jenis_gim').value || "-",
+                p2_kemudahan: document.querySelector('input[name="p2_kemudahan"]:checked')?.value || "Belum diisi",
+                p3_gambaran: document.querySelector('input[name="p3_gambaran"]:checked')?.value || "Belum diisi",
+                p3_fitur: document.getElementById('p3_fitur').value || "-",
+                p3_tantangan: document.getElementById('p3_tantangan').value || "-",
+                p4_kesiapan: document.querySelector('input[name="p4_kesiapan"]:checked')?.value || "Belum diisi",
+                p4_praktik_baik: document.getElementById('p4_praktik_baik').value || "-"
+            };
+
+            btnSubmit.disabled = true;
+            btnSubmit.innerText = "Mengirim Data...";
+
+            if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL !== "PASANG_URL_GOOGLE_APPS_SCRIPT_DI_SINI") {
+                try {
+                    await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    playSuccess();
+                    outputSuccess.classList.remove('hidden');
+                    outputSuccess.scrollIntoView({ behavior: 'smooth' });
+                    btnSubmit.innerText = "Umpan Balik Terkirim!";
+                } catch (err) {
+                    alert("Gagal mengirim data. Silakan cek koneksi internet Anda.");
+                    btnSubmit.disabled = false;
+                    btnSubmit.innerText = "Kirim Umpan Balik Kombel";
+                }
+            } else {
+                setTimeout(() => {
+                    playSuccess();
+                    outputSuccess.classList.remove('hidden');
+                    outputSuccess.scrollIntoView({ behavior: 'smooth' });
+                    btnSubmit.innerText = "Tersimpan Lokal (URL Script Belum Dipasang)";
+                }, 500);
+            }
+        }
+
+        function exportJSON() {
+            const pDiikuti = [];
+            document.querySelectorAll('input[name="pertemuan"]:checked').forEach(cb => pDiikuti.push(cb.value));
+
+            const data = {
+                mapel: document.getElementById('mapel').value,
+                fase: document.querySelector('input[name="fase"]:checked')?.value,
+                pertemuan_diikuti: pDiikuti,
+                p1_pemahaman: document.querySelector('input[name="p1_pemahaman"]:checked')?.value,
+                p1_bermanfaat: document.getElementById('p1_bermanfaat').value,
+                p1_kendala: document.getElementById('p1_kendala').value,
+                p2_kesesuaian: document.querySelector('input[name="p2_kesesuaian"]:checked')?.value,
+                p2_jenis_gim: document.getElementById('p2_jenis_gim').value,
+                p2_kemudahan: document.querySelector('input[name="p2_kemudahan"]:checked')?.value,
+                p3_gambaran: document.querySelector('input[name="p3_gambaran"]:checked')?.value,
+                p3_fitur: document.getElementById('p3_fitur').value,
+                p3_tantangan: document.getElementById('p3_tantangan').value,
+                p4_kesiapan: document.querySelector('input[name="p4_kesiapan"]:checked')?.value,
+                p4_praktik_baik: document.getElementById('p4_praktik_baik').value
+            };
+
+            const jsonStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 2));
+            const dlAnchor = document.createElement('a');
+            dlAnchor.setAttribute("href", jsonStr);
+            dlAnchor.setAttribute("download", "umpan_balik_kombel_sman1tangen.json");
+            document.body.appendChild(dlAnchor);
+            dlAnchor.click();
+            dlAnchor.remove();
+        }
+    </script>
+</body>
+</html>
